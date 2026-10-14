@@ -19,6 +19,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +48,9 @@ class MainActivity : ComponentActivity() {
 fun ProfileCardLeft() {
     Card(
         modifier = Modifier
-            .width(320.dp)
+            .width(460.dp)
             .wrapContentHeight()
-            .padding(16.dp),
+            .padding(horizontal = 24.dp, vertical = 16.dp),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
@@ -64,7 +67,7 @@ fun ProfileCardLeft() {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.dp)
+                    .height(500.dp)
 //                    .align(Alignment.CenterHorizontally)
                     .clip(
                         RoundedCornerShape(
@@ -79,7 +82,7 @@ fun ProfileCardLeft() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp) // 📍 Padding khusus untuk Teks & Tombol saja
+                    .padding(20.dp) // 📍 Padding khusus untuk Teks & Tombol saja
             ) {
 
                 // 2. NAMA + BADGE VERIFIKASI
@@ -96,20 +99,13 @@ fun ProfileCardLeft() {
                     Spacer(modifier = Modifier.width(8.dp))
 
                     // Badge Verifikasi Hijau
-                    Box(
-                        modifier = Modifier
-                            .size(20.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFF28C751)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "",
-                            color = Color.White,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.check),
+                        contentDescription = "Verified Badge",
+                        tint = Color(0xFF28C751), // Warna hijau centang (atau Color.Unspecified jika file xml sudah berwarna)
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -137,7 +133,12 @@ fun ProfileCardLeft() {
                     ) {
                         // Item 1: User / Followers
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "👤", fontSize = 14.sp, color = Color.Gray)
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "Followers",
+                                tint = Color(0xFF757575),
+                                modifier = Modifier.size(18.dp)
+                            )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
                                 text = "312",
