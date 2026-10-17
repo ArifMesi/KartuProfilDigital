@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.clickable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +50,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ProfileCardLeft() {
+    var context = LocalContext.current //buat buka link
+    var isFollowing by remember {mutableStateOf(false)} //state nyimpen status follow
+    var dynamicFollower by remember {mutableStateOf(312)} // state jumlah followers
+
     Card(
         modifier = Modifier
             .width(460.dp)
@@ -67,16 +75,10 @@ fun ProfileCardLeft() {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(12.dp)
                     .height(500.dp)
 //                    .align(Alignment.CenterHorizontally)
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = 32.dp,
-                            topEnd = 32.dp,
-                            bottomStart = 24.dp,
-                            bottomEnd = 24.dp
-                        )
-                    )
+                    .clip(RoundedCornerShape(24.dp))
             )
 
             Column(
@@ -87,7 +89,8 @@ fun ProfileCardLeft() {
 
                 // 2. NAMA + BADGE VERIFIKASI
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+
                 ) {
                     Text(
                         text = "Arif Mesi",
@@ -120,6 +123,34 @@ fun ProfileCardLeft() {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            // 📩 INTENT EMAIL DIJALANKAN SAAT DIKLIK
+                            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                                data = Uri.parse("mailto:dhotaaa@gmail.com")
+                            }
+                            context.startActivity(emailIntent)
+                        }
+                        .padding(vertical = 4.dp, horizontal = 4.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.mail),
+                        contentDescription = "Email",
+                        tint = Color(0xFF1A73E8),
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "contact me on email",
+                        fontSize = 14.sp,
+                        color = Color(0xFF1A73E8),
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
                 // 4. STATISTIK & TOMBOL FOLLOW
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -141,7 +172,7 @@ fun ProfileCardLeft() {
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "312",
+                                text = dynamicFollower.toString(),
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color(0xFF222222)
@@ -149,8 +180,18 @@ fun ProfileCardLeft() {
                         }
 
                         // Item 2: Projects / Posts
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "🖼️", fontSize = 14.sp, color = Color.Gray)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.clickable {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ArifMesi"))
+                                context.startActivity(intent)
+                            }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.github),
+                                contentDescription = "GitHub",
+                                tint = Color(0xFF111111),
+                                modifier = Modifier.size(18.dp)
+                            )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
                                 text = "48",
@@ -163,17 +204,25 @@ fun ProfileCardLeft() {
 
                     // Tombol "Follow +"
                     Button(
-                        onClick = { /* Aksi saat follow diklik */ },
+                        onClick = {
+                            if (isFollowing) {
+                                dynamicFollower--
+                            } else {
+                                dynamicFollower++
+                            }
+                            isFollowing = !isFollowing
+                                  },
                         shape = RoundedCornerShape(20.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFF1F3F5),
-                            contentColor = Color(0xFF111111)
+                            containerColor = if (isFollowing) Color(0xFF1A73E8) else Color(0xFFF1F3F5),
+                            contentColor = if (isFollowing) Color.White else Color(0xFF111111)
+//
                         ),
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
                         contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp)
                     ) {
                         Text(
-                            text = "Follow  +",
+                            text = if (isFollowing) "Following" else "Follow",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold
                         )
