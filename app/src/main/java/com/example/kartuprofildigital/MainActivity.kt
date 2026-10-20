@@ -1,13 +1,21 @@
 package com.example.kartuprofildigital
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,17 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.foundation.clickable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +36,13 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFFF2F3F5) // Warna background luar yang lembut
+                    color = Color(0xFF0D0F12)
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        ProfileCardLeft()
+                        ProfileCardDarkF1()
                     }
                 }
             }
@@ -49,186 +51,336 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProfileCardLeft() {
-    var context = LocalContext.current //buat buka link
-    var isFollowing by remember {mutableStateOf(false)} //state nyimpen status follow
-    var dynamicFollower by remember {mutableStateOf(312)} // state jumlah followers
+fun ProfileCardDarkF1() {
+    val context = LocalContext.current
+    val scrollState = rememberScrollState() // State untuk mengontrol scroll vertical
 
     Card(
         modifier = Modifier
-            .width(460.dp)
-            .wrapContentHeight()
+            .fillMaxWidth()
+            .height(620.dp) // Mengatur tinggi tetap kartu agar konten di dalamnya bisa di-scroll
             .padding(horizontal = 24.dp, vertical = 16.dp),
         shape = RoundedCornerShape(32.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF12161F)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
     ) {
         Column(
             modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(16.dp)  // dihapus
+                .fillMaxSize()
+                .verticalScroll(scrollState) // 📍 Mengaktifkan scroll di dalam kartu
         ) {
-            // 1. FOTO PROFIL
-            Image(
-                painter = painterResource(id = R.drawable.foto_profil),
-                contentDescription = "Foto Profil",
-                contentScale = ContentScale.Crop,
+            // 1. BANNER HEADER
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(12.dp)
-                    .height(500.dp)
-//                    .align(Alignment.CenterHorizontally)
-                    .clip(RoundedCornerShape(24.dp))
-            )
+                    .height(150.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.background),
+                    contentDescription = "F1 Background Banner",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
+            // 2. AVATAR OVERLAP + STATUS BADGE
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.foto_profil_update),
+                    contentDescription = "F1 Driver Profile",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .offset(y = (-40).dp)
+                        .size(85.dp)
+                        .clip(CircleShape)
+                        .border(4.dp, Color(0xFF12161F), CircleShape)
+                )
+
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color(0x2628C751),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x4D28C751)),
+                    modifier = Modifier.offset(y = (-10).dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFF28C751))
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "Open to drive",
+                            fontSize = 12.sp,
+                            color = Color(0xFF28C751),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+
+            // 3. KONTEN PROFILE & STATISTIK
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp) // 📍 Padding khusus untuk Teks & Tombol saja
+                    .padding(horizontal = 20.dp)
+                    .padding(bottom = 24.dp)
             ) {
-
-                // 2. NAMA + BADGE VERIFIKASI
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-
-                ) {
-                    Text(
-                        text = "Arif Mesi",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF111111)
-                    )
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    // Badge Verifikasi Hijau
-
-                    Icon(
-                        painter = painterResource(id = R.drawable.check),
-                        contentDescription = "Verified Badge",
-                        tint = Color(0xFF28C751), // Warna hijau centang (atau Color.Unspecified jika file xml sudah berwarna)
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // 3. DESKRIPSI / BIO
-                Text(
-                    text = "Product Designer who focuses on simplicity & usability.",
-                    fontSize = 14.sp,
-                    color = Color(0xFF757575),
-                    lineHeight = 20.sp
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
-                        .clickable {
-                            // 📩 INTENT EMAIL DIJALANKAN SAAT DIKLIK
-                            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                                data = Uri.parse("mailto:dhotaaa@gmail.com")
-                            }
-                            context.startActivity(emailIntent)
-                        }
-                        .padding(vertical = 4.dp, horizontal = 4.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.mail),
-                        contentDescription = "Email",
-                        tint = Color(0xFF1A73E8),
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "contact me on email",
-                        fontSize = 14.sp,
-                        color = Color(0xFF1A73E8),
-                        fontWeight = FontWeight.Medium
-                    )
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                // 4. STATISTIK & TOMBOL FOLLOW
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Ikon & Jumlah Pengikut / Postingan
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        // Item 1: User / Followers
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Filled.Person,
-                                contentDescription = "Followers",
-                                tint = Color(0xFF757575),
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = dynamicFollower.toString(),
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF222222)
-                            )
-                        }
-
-                        // Item 2: Projects / Posts
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.clickable {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ArifMesi"))
-                                context.startActivity(intent)
-                            }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.github),
-                                contentDescription = "GitHub",
-                                tint = Color(0xFF111111),
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = "48",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF222222)
-                            )
-                        }
+                    Column {
+                        Text(
+                            text = "Kimi Antonelli",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                        Text(
+                            text = "F1 Driver | Mercedes AMG Petronas",
+                            fontSize = 13.sp,
+                            color = Color(0xFF8A8F9D)
+                        )
                     }
+                    Icon(
+                        imageVector = Icons.Filled.MoreHoriz,
+                        contentDescription = "More Options",
+                        tint = Color(0xFF8A8F9D)
+                    )
+                }
 
-                    // Tombol "Follow +"
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // F1 Stats Grid
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color(0x0DFFFFFF))
+                        .padding(vertical = 14.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    StatItem(label = "RACE WIN", value = "14")
+                    StatItem(label = "PODIUM", value = "38")
+                    StatItem(label = "POLE POS", value = "21")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // About Brief
+                Text(
+                    text = "About",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "Competing at the highest level of motorsport. Pushing limits on every corner.",
+                    fontSize = 13.sp,
+                    color = Color(0xFFA0A5B5),
+                    lineHeight = 18.sp
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // 📍 BARIS TOMBOL GET IN TOUCH
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Button(
                         onClick = {
-                            if (isFollowing) {
-                                dynamicFollower--
-                            } else {
-                                dynamicFollower++
+                            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                                data = Uri.parse("mailto:arifmesi@example.com")
                             }
-                            isFollowing = !isFollowing
-                                  },
-                        shape = RoundedCornerShape(20.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (isFollowing) Color(0xFF1A73E8) else Color(0xFFF1F3F5),
-                            contentColor = if (isFollowing) Color.White else Color(0xFF111111)
-//
-                        ),
-                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
-                        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp)
+                            context.startActivity(emailIntent)
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(48.dp),
+                        shape = RoundedCornerShape(24.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3B82F6))
                     ) {
                         Text(
-                            text = if (isFollowing) "Following" else "Follow",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
+                            text = "Get in touch",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            val githubIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ArifMesi"))
+                            context.startActivity(githubIntent)
+                        },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color(0x1AFFFFFF), CircleShape)
+                            .border(1.dp, Color(0x1AFFFFFF), CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.PersonAdd,
+                            contentDescription = "Github",
+                            tint = Color.White
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.height(28.dp))
+
+                // 📍 PARAGRAF BIODATA LENGKAP (Muncul saat di-scroll ke bawah)
+                Text(
+                    text = "Full Biography & Career Highlights",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Arif Mesi memulai kariernya di dunia balap dari kejuaraan gokart internasional sejak usia muda sebelum menembus Formula 1 bersama tim Scuderia Performance.\n\nDikenal dengan gaya membalap yang agresif namun presisi di sirkuit basah, ia telah mengantongi 14 kemenangan balapan, 38 kali naik podium, serta 21 pole position sepanjang kariernya.\n\nSelain fokus di lintasan balap, Arif juga aktif dalam pengembangan aerodinamis mobil balap serta kampanye keselamatan berkendara di tingkat global.",
+                    fontSize = 13.sp,
+                    color = Color(0xFFA0A5B5),
+                    lineHeight = 20.sp
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                //Dokumentasi
+                Text(
+                    text = "Knows the Limit",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_1),
+                        contentDescription = "Career Documentation 1",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_2),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_3),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_4),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ){
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_4),
+                        contentDescription = "Career Documentation 1",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_3),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_2),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.documentation_1),
+                        contentDescription = "Career Documentation 2",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+
             }
         }
+    }
+}
+
+@Composable
+fun StatItem(label: String, value: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = label,
+            fontSize = 11.sp,
+            color = Color(0xFF8A8F9D),
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = value,
+            fontSize = 20.sp,
+            color = Color.White,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
