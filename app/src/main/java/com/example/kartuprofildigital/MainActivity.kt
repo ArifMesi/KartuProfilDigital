@@ -28,6 +28,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInParent
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,11 +57,14 @@ class MainActivity : ComponentActivity() {
 fun ProfileCardDarkF1() {
     val context = LocalContext.current
     val scrollState = rememberScrollState() // State untuk mengontrol scroll vertical
+    val coroutineScope = rememberCoroutineScope()
+    var bioPositionPx by remember { mutableFloatStateOf(0f) }
+    var isScrollEnabled by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(620.dp) // Mengatur tinggi tetap kartu agar konten di dalamnya bisa di-scroll
+            .height(565.dp) // Mengatur tinggi tetap kartu agar konten di dalamnya bisa di-scroll
             .padding(horizontal = 24.dp, vertical = 16.dp),
         shape = RoundedCornerShape(32.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFF12161F)),
@@ -67,7 +73,11 @@ fun ProfileCardDarkF1() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState) // 📍 Mengaktifkan scroll di dalam kartu
+                .verticalScroll(
+                    state = scrollState,
+                    enabled = isScrollEnabled
+                )
+
         ) {
             // 1. BANNER HEADER
             Box(
@@ -120,7 +130,7 @@ fun ProfileCardDarkF1() {
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "Open to drive",
+                            text = "#1 Classement | 340 PTS",
                             fontSize = 12.sp,
                             color = Color(0xFF28C751),
                             fontWeight = FontWeight.Bold
@@ -203,10 +213,11 @@ fun ProfileCardDarkF1() {
                 ) {
                     Button(
                         onClick = {
-                            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                                data = Uri.parse("mailto:arifmesi@example.com")
+                            isScrollEnabled = true
+
+                            coroutineScope.launch {
+                                scrollState.animateScrollTo(bioPositionPx.toInt())
                             }
-                            context.startActivity(emailIntent)
                         },
                         modifier = Modifier
                             .weight(1f)
@@ -241,12 +252,17 @@ fun ProfileCardDarkF1() {
 
                 Spacer(modifier = Modifier.height(28.dp))
 
-                // 📍 PARAGRAF BIODATA LENGKAP (Muncul saat di-scroll ke bawah)
+
+                // ... Di dalam komponen Text "Full Biography" ...
                 Text(
                     text = "Full Biography & Career Highlights",
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.White,
+                    modifier = Modifier.onGloballyPositioned { coordinates ->
+                        // 📍 Menyimpan posisi koordinat Y dari judul Biography
+                        bioPositionPx = coordinates.positionInParent().y
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
