@@ -68,7 +68,22 @@ val kimiAntonelli = F1Driver(
     backgroundImg = R.drawable.background,
     logoImg = R.drawable.mercedes_logo,
     accentColor = Color(0xFF27F4D2), // Toska Mercedes
-    bio = "Kimi Antonelli memulai kariernya di dunia balap dari kejuaraan gokart internasional sebelum menembus Formula 1 bersama tim Mercedes AMG Petronas."
+    bio = "Andrea Kimi Antonelli lahir 25 Agustus 2006, yang lebih dikenal sebagai Kimi Antonelli, adalah seorang pembalap Italia yang saat ini bersaing di Kejuaraan Dunia Formula Satu dengan tim Mercedes. Antonelli telah memenangkan beberapa gelar di kategori mobil tunggal sepanjang kariernya, termasuk Kejuaraan F4 Italia dan Kejuaraan Formula 4 ADAC bersama Prema, serta Kejuaraan Formula Regional Timur Tengah 2023 dengan Mumbai Falcons dan Kejuaraan Formula Regional Eropa 2023 dengan Prema. Sejak tahun 2019, dia juga telah menjadi bagian dari Mercedes Junior Team."
+)
+
+val georgeRussell = F1Driver(
+    rank = 4,
+    points = 340,
+    name = "George Russell",
+    team = "F1 Driver | Mercedes AMG Petronas",
+    raceWins = "8",
+    podiums = "32",
+    polePositions = "13",
+    profileImg = R.drawable.foto_profil_russell,
+    backgroundImg = R.drawable.background_russell,
+    logoImg = R.drawable.mercedes_logo,
+    accentColor = Color(0xFF27F4D2), // Toska Mercedes
+    bio = "George William Russell lahir 15 Februari 1998, adalah seorang pembalap mobil profesional Inggris yang saat ini membalap di ajang Formula Satu dengan Mercedes. Pembalap dengan nomor 63 ini merupakan seorang juara Formula 2 musim 2018 dan juara Seri GP3 musim 2017. Setelah memenangkan gelar Formula 2, ia membalap untuk Williams pada 2019, membuat debutnya di F1 pada Grand Prix Australia 2019 bersama Robert Kubica. Russell menggantikan Lewis Hamilton pada Grand Prix Sakhir 2020. Ia memperoleh podium pertamanya di Grand Prix Belgia 2021 bersama Williams. Setelah 3 tahun dengan Williams, Russell bergabung dengan Mercedes pada musim 2022, menggantikan Valtteri Bottas."
 )
 
 val lewisHamilton = F1Driver(
@@ -83,7 +98,10 @@ val lewisHamilton = F1Driver(
     backgroundImg = R.drawable.background_lewis_update, // Ganti background Ferrari
     logoImg = R.drawable.ferrari_logo, // Pastikan ferrari_logo.xml sudah di-import
     accentColor = Color(0xFFE80020), // Merah Ferrari
-    bio = "Sir Lewis Hamilton adalah Juara Dunia F1 7 kali yang kini membela Scuderia Ferrari. Memegang rekor kemenangan, podium, dan pole position terbanyak dalam sejarah Formula 1."
+    bio = "Sir Lewis Carl Davidson Hamilton MBE (lahir 7 Januari 1985) adalah seorang pembalap mobil profesional dari Britania Raya, yang pada saat ini membalap untuk Scuderia Ferrari di dalam ajang Formula Satu. Sekarang, dia memiliki gelar dunia terbanyak, yakni 7 (dipegang bersama dengan Michael Schumacher), dan juga kemenangan (105), posisi terdepan (104), dan finis podium terbanyak (203).\n" +
+            "\n" +
+            "Lahir dan dibesarkan di Stevenage, Hertfordshire, Inggris, Hamilton bergabung di program pembalap muda McLaren pada tahun 1998. Ini berujung pada Hamilton yang membalap untuk tim McLaren pada musim 2007 sampai dengan 2012, dan membuat Hamilton menjadi pembalap berkulit hitam yang pertama, dan sejauh ini satu-satunya yang membalap di seri tersebut. Di debutnya, dia finis di posisi kedua di belakang Kimi Räikkönen dengan jarak satu poin. Musim berikutnya, dia berhasil memenangkan gelar juara dunia pertamanya dengan kontroversial—dengan mendahului di putaran terakhir di balapan terakhir musim—dan pada waktu itu menjadi juara dunia Formula Satu yang termuda dalam sejarah. Setelah 6 tahun lagi bersama dengan tim McLaren, Hamilton bergabung bersama dengan tim Mercedes pada musim 2013. Sejak musim 2025, Hamilton membalap untuk tim Scuderia Ferrari dan bertandem dengan Charles Leclerc.\n" +
+            "\n" + "Hamilton menikmati kesuksesan besar pada era mesin turbo-hibrida yang dimulai dari musim 2014, di mana dia berhasil memenangkan 6 gelar juara dunia. 2 gelar juara dunia secara berturut-turut datang pada musim 2014 dan 2015 dengan persaingan ketat dengan rekan setimnya, yaitu Nico Rosberg. Setelah Rosberg pensiun, pembalap Ferrari, yaitu Sebastian Vettel, menjadi saingan terdekat Hamilton dalam dua pertarungan kejuaraan dunia yang intens, dan Hamilton dua kali membalikkan defisit poin pada pertengahan musim untuk mengklaim gelar juara dunia secara berturut-turut lagi pada musim 2017 dan 2018. 2 gelar juara dunia lagi datang pada musim 2019 dan 2020, menyamai jumlah gelar juara dunia Michael Schumacher."
 )
 
 val charlesLeclerc = F1Driver(
@@ -98,11 +116,11 @@ val charlesLeclerc = F1Driver(
     backgroundImg = R.drawable.background_charles, // Ganti background Ferrari
     logoImg = R.drawable.ferrari_logo, // Pastikan ferrari_logo.xml sudah di-import
     accentColor = Color(0xFFE80020), // Merah Ferrari
-    bio = ""
+    bio = "Charles Marc Hervé Percival Leclerc lahir 16 Oktober 1997, merupakan seorang pembalap mobil profesional dari Monako yang saat ini membalap di arena Formula Satu untuk tim Scuderia Ferrari. Ia merupakan juara Seri GP3 musim 2016 dan Formula 2 musim 2017. Leclerc naik kelas ke ajang Formula Satu di musim 2018 dengan bergabung bersama tim Sauber. Debutnya di ajang F1 dimulai di Australia 2018. Selama musim 2018 berjalan, Leclerc meraih 39 poin dan mengantar tim Sauber bangkit dari sebelumnya posisi dasar klasemen di 2017 menjadi naik ke posisi 8. Atas prestasinya tersebut, Leclerc kemudian mendapat promosi naik kelas ke tim Ferrari pada tahun 2019 untuk menggantikan Kimi Räikkönen dan menjadi rekan setim Sebastian Vettel."
     )
 
 val maxVerstappen = F1Driver(
-    rank = 4,
+    rank = 5,
     points = 290,
     name = "Max Verstappen",
     team = "F1 Driver | Red Bull Racing",
@@ -113,11 +131,49 @@ val maxVerstappen = F1Driver(
     backgroundImg = R.drawable.background_max,
     logoImg = R.drawable.redbullracing_logo,
     accentColor = Color(0xFF3F51B5),
-    bio = ""
+    bio = "Max Emilian Verstappen lahir 30 September 1997, adalah seorang pembalap mobil profesional Belgia-Belanda, yang pada saat ini bersaing di bawah bendera Belanda di dalam ajang balap Formula Satu bersama dengan tim Red Bull Racing. Ia adalah putra dari mantan pembalap F1, yaitu Jos Verstappen.\n" +
+            "\n" +
+            "Di Grand Prix Australia 2015, dalam usia 17 tahun dan 166 hari, ia menjadi pembalap termuda yang berkompetisi di dalam ajang Formula Satu. Setelah menghabiskan musim 2015 bersama dengan tim Toro Rosso, ia memulai musim 2016 bersama dengan tim asal Italia ini sebelum dipromosikan ke tim induk Toro Rosso, yaitu Red Bull, sebagai pengganti Daniil Kvyat. Ia kemudian berhasil memenangkan Grand Prix Spanyol 2016 dalam lomba pertamanya untuk tim Red Bull pada usia 18 tahun, dan menjadi pemenang termuda sebuah Grand Prix, dan menjadi pemenang balapan F1 yang paling pertama di bawah bendera Belanda. Setelah berhasil memenangkan Grand Prix Abu Dhabi 2021, ia menjadi pembalap Belanda yang pertama yang berhasil memenangkan gelar kejuaraan dunia Formula Satu, dan merupakan juara dunia pembalap Formula Satu yang ke-34."
+)
+
+val isackHadjar = F1Driver(
+    rank = 7,
+    points = 278,
+    name = "Isack Hadjar",
+    team = "F1 Driver | Red Bull Racing",
+    raceWins = "0",
+    podiums = "3",
+    polePositions = "0",
+    profileImg = R.drawable.foto_profil_hadjar,
+    backgroundImg = R.drawable.background_hadjar,
+    logoImg = R.drawable.redbullracing_logo,
+    accentColor = Color(0xFF3F51B5),
+    bio = "Isack Alexandre Hadjar (lahir 28 September 2004) adalah seorang pembalap mobil profesional asal Prancis dan Aljazair, yang berlomba di ajang Formula Satu untuk tim Racing Bulls.\n" +
+            "\n" +
+            "Lahir dan dibesarkan di Paris dalam keluarga Aljazair, Hadjar mulai balapan go-kart kompetitif pada usia tujuh tahun. Setelah debut di balap mobil sport pada Ginetta Junior Winter Series, Hadjar melanjutkan ke formula junior pada tahun 2019. Ia finis di posisi ketiga pada Kejuaraan F4 Prancis 2020 bersama FFSA Academy, sebelum melanjutkan ke Kejuaraan Formula Regional Eropa pada tahun 2021, meraih beberapa kemenangan dan finis di posisi kelima pada musim debutnya. Ia kemudian mengikuti Formula Regional Asia dan Formula 3 FIA pada tahun 2022 bersama Hitech, meraih posisi ketiga di Formula Regional Asia dan mencatatkan beberapa kemenangan di keduanya. Hadjar naik ke Formula 2 FIA pada tahun 2023, finis sebagai runner-up di belakang Gabriel Bortoleto pada musim berikutnya bersama Campos.\n" +
+            "\n" +
+            "Sebagai anggota Red Bull Junior Team sejak 2022, Hadjar melakukan debut sesi latihan bebas di Formula Satu pada Grand Prix Kota Meksiko 2023. Ia berkompetisi pada musim 2025 bersama dengan Racing Bulls, memulai debutnya pada Grand Prix Australia 2025."
+)
+
+val oscarPiastri = F1Driver(
+    rank = 6,
+    points = 282,
+    name = "Oscar Piastri",
+    team = "F1 Driver | Mclaren",
+    raceWins = "9",
+    podiums = "28",
+    polePositions = "6",
+    profileImg = R.drawable.foto_profil_piastri,
+    backgroundImg = R.drawable.background_piastri,
+    logoImg = R.drawable.mclaren_logo,
+    accentColor = Color(0xFFFF5722),
+    bio = "Oscar Jack Piastri (lahir 6 April 2001) adalah seorang pembalap asal Australia yang berkompetisi pada ajang Formula Satu bersama dengan McLaren, setelah sebelumnya menjadi pembalap cadangan untuk Alpine F1 Team dan anggota akademi pembalap tim tersebut.\n" +
+            "\n" +
+            "Piastri memenangi Formula Renault Eurocup 2019 dengan R-ace GP, lalu memenangi Formula 3 musim 2020 dan Formula 2 musim 2020 dengan Prema Racing. Piastri adalah salah satu dari enam pembalap yang memenangi kejuaraan GP2/Formula 2 dalam musim pertama mereka."
 )
 
 val landoNorris = F1Driver(
-    rank = 5,
+    rank = 8,
     points = 275,
     name = "Lando Norris",
     team = "F1 Driver | Mclaren",
@@ -128,10 +184,14 @@ val landoNorris = F1Driver(
     backgroundImg = R.drawable.background_lando,
     logoImg = R.drawable.mclaren_logo,
     accentColor = Color(0xFFFF5722),
-    bio = ""
+    bio = "Lando Norris lahir 13 November 1999, merupakan seorang pembalap mobil profesional berkewarganegaraan Inggris-Belgia. Ia sekarang berkompetisi di Formula Satu bersama tim McLaren. Kariernya di ajang junior cukup gemilang dengan berhasil memenangi gelar juara MSA Formula championship, Toyota Racing Series, Eurocup Formula Renault 2.0 dan Formula Renault 2.0 Northern European Cup di periode 2015-2016. Ia pernah bergabung dengan McLaren Young Driver Programme.\n" +
+            "\n" +
+            "Debutnya dalam ajang Formula Satu dimulai pada Grand Prix Australia 2019. Sejak saat itu, ia meraih podium pertamanya saat finis ketiga pada Grand Prix Austria 2020, disusul kemudian posisi pole pertamanya pada Grand Prix Rusia 2021. Pada Grand Prix Miami 2024, Norris berhasil meraih kemenangan F1 pertamanya.\n" +
+            "\n" +
+            "Pada musim 2025 di Formula Satu (F1), Lando Norris berhasil meraih gelar juara dunia pembalap (World Drivers’ Championship) untuk pertama kalinya. Pembalap tim McLaren F1 Team ini memastikan gelar tersebut di seri penutup, 2025 Abu Dhabi Grand Prix — meskipun finis di posisi ketiga, itu sudah cukup untuk mengumpulkan total 423 poin, unggul 2 poin atas pesaingnya, Max Verstappen. Kemenangan ini mengakhiri dominasi Verstappen selama empat tahun berturut-turut dan menjadi kemenangan juara dunia pertama untuk McLaren sejak 2008, serta menandai pertama kalinya pembalap asal Inggris jadi juara dunia sejak 2020. Prestasi itu menghiasi musim di mana Norris sering tampil kompetitif, meskipun sempat menghadapi tantangan termasuk diskualifikasi di 2025 Las Vegas Grand Prix."
 )
 
-val driverList = listOf(kimiAntonelli, lewisHamilton, charlesLeclerc, maxVerstappen, landoNorris)
+val driverList = listOf(kimiAntonelli, lewisHamilton, charlesLeclerc, georgeRussell, maxVerstappen, oscarPiastri, isackHadjar, landoNorris)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,7 +213,7 @@ class MainActivity : ComponentActivity() {
 fun F1DriverDrawerScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
-    var currentDriver by remember { mutableStateOf(lewisHamilton) }
+    var currentDriver by remember { mutableStateOf(kimiAntonelli) }
 
     // 📍 SIDEBAR NAVIGATION DRAWER (Slide dari Kiri)
     ModalNavigationDrawer(
